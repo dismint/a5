@@ -24,7 +24,7 @@ const patchWebapp = async (name: string, description: string, url: string, id: s
 <template>
   <main>
     <h2>Patch Webapp</h2>
-    <form @submit.prevent="patchWebapp(name, description, url)">
+    <form @submit.prevent="patchWebapp(name, description, url, id)">
       <label for="id">id</label>
       <textarea id="id" v-model="id" placeholder="id" required> </textarea>
       <br />
