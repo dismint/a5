@@ -53,6 +53,11 @@ export const useUserStore = defineStore(
       resetStore();
     };
 
+    const getUserId = async () => {
+      const { _id } = await fetchy(`/api/users/${currentUsername.value}`, "GET");
+      return _id;
+    };
+
     return {
       currentUsername,
       isLoggedIn,
@@ -63,6 +68,7 @@ export const useUserStore = defineStore(
       updateUserUsername,
       updateUserPassword,
       deleteUser,
+      getUserId,
     };
   },
   { persist: true },
