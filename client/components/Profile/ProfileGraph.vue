@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { VueFlow, useVueFlow, MarkerType } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { ControlButton, Controls } from '@vue-flow/controls'
@@ -9,7 +9,7 @@ import '@vue-flow/core/dist/style.css'
 
 const { onInit, onNodeClick, onConnect, addEdges, setViewport, toObject, addNodes, fitView } = useVueFlow()
 const emit = defineEmits(["nodeClick"]);
-
+const props = defineProps(["updateGraph"]);
 const initNodes = ref([])
 const initEdges = ref([])
 
@@ -25,6 +25,10 @@ onNodeClick(async ({ event, node }) => {
 
 onConnect((connection) => {
   addEdges(connection)
+})
+
+watch(() => props.updateGraph, async (newVal, oldVal) => {
+  populateGraph();  
 })
 
 function circlePoint(radius: number): { x: number; y: number } {
@@ -46,6 +50,17 @@ async function populateGraph() {
       data: { label: webapp.name },
       class: 'light',
     });
+  }
+  for (let node of graph) {
+    for (let edge of node.neighbors) {
+      console.log(node.item, edge);
+      addEdges({
+        id: `${node.item}-${edge}`,
+        source: node.item,
+        target: edge,
+        animated: true,
+      });
+    }
   }
 
   setViewport({ x: 210, y: 235, zoom: 0.5 })

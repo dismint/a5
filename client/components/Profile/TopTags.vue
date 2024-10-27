@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { fetchy } from "../../utils/fetchy";
 import { useToastStore } from "@/stores/toast";
 import { useUserStore } from "@/stores/user";
 
 type TopTag = { tag: string; count: number };
 const tags = ref<TopTag[]>([]);
+const props = defineProps(["updateTop"]);
 
 onMounted(async () => {
   const topTags = await fetchy("/api/user/top/tags", "GET");
@@ -13,6 +14,14 @@ onMounted(async () => {
     tags.value.push({ tag: tag.tag, count: tag.count });
   }
 });
+
+watch(() => props.updateTop, async (newVal, oldVal) => {
+  tags.value = [];
+  const topTags = await fetchy("/api/user/top/tags", "GET");
+  for (let tag of topTags) {
+    tags.value.push({ tag: tag.tag, count: tag.count });
+  }
+})
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { fetchy } from "../../utils/fetchy";
 import { useToastStore } from "@/stores/toast";
 import { useUserStore } from "@/stores/user";
@@ -7,6 +7,7 @@ import { useUserStore } from "@/stores/user";
 const username = ref("");
 const joinDate = ref("");
 const webappcount = ref(0);
+const props = defineProps(["update"]);
 
 onMounted(async () => {
   const userData = await fetchy("/api/session", "GET");
@@ -15,6 +16,15 @@ onMounted(async () => {
   joinDate.value = new Date(userData.dateCreated).toLocaleDateString();
   webappcount.value = webapps.length;
 });
+
+watch(() => props.update, async (newVal, oldVal) => {
+  const userData = await fetchy("/api/session", "GET");
+  const webapps = await fetchy("/api/webapp/view/all", "GET");
+  username.value = useUserStore().currentUsername;
+  joinDate.value = new Date(userData.dateCreated).toLocaleDateString();
+  webappcount.value = webapps.length;
+})
+
 </script>
 
 <template>
