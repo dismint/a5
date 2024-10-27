@@ -19,6 +19,7 @@ function changeNode(value: string) {
 function changed() {
   updateTop.value = !updateTop.value;
   updateGraph.value = !updateGraph.value;
+
 }
 </script>
 
