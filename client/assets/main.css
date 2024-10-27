@@ -1,8 +1,16 @@
 /* Add some global styles here! */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   --red: rgb(208, 67, 12);
   --base-bg: #f1f3f5;
+  --text: #efecf1;
+  --background: #0c0a0e;
+  --primary: #bcb0c6;
+  --secondary: #5d4d43;
+  --accent: #93946c;
+  font-family: 'Inter', sans-serif;
 }
 
 button.btn-small {
@@ -29,4 +37,38 @@ a.button {
   justify-content: center;
   align-items: center;
   gap: 1em;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  max-width: 75%;
+  gap: 1em;
+}
+
+body {
+  padding-top: 6em;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 20px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary);
 }

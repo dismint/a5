@@ -72,8 +72,9 @@ p,
 }
 
 article {
-  background-color: var(--base-bg);
+  background-color: var(--background);
   border-radius: 1em;
+  border: 1px solid var(--accent);
   display: flex;
   flex-direction: column;
   gap: 0.5em;

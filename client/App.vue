@@ -25,23 +25,23 @@ onBeforeMount(async () => {
   <header>
     <nav>
       <div class="title">
-        <img src="@/assets/images/logo.svg" />
+        <img src="@/assets/images/cobweb.png" />
         <RouterLink :to="{ name: 'Home' }">
           <h1>Webber</h1>
         </RouterLink>
       </div>
       <ul>
         <li>
-          <RouterLink :to="{ name: 'Home' }" :class="{ underline: currentRouteName == 'Home' }"> Home </RouterLink>
+          <RouterLink :to="{ name: 'Home' }" :class="{ filled: currentRouteName == 'Home' }"> Home </RouterLink>
         </li>
         <li v-if="isLoggedIn">
-          <RouterLink :to="{ name: 'Settings' }" :class="{ underline: currentRouteName == 'Settings' }"> Settings </RouterLink>
+          <RouterLink :to="{ name: 'Settings' }" :class="{ filled: currentRouteName == 'Settings' }"> Settings </RouterLink>
         </li>
         <li v-else>
-          <RouterLink :to="{ name: 'Login' }" :class="{ underline: currentRouteName == 'Login' }"> Login </RouterLink>
+          <RouterLink :to="{ name: 'Login' }" :class="{ filled: currentRouteName == 'Login' }"> Login </RouterLink>
         </li>
         <li v-if="isLoggedIn">
-          <RouterLink :to="{ name: 'Profile' }" :class="{ underline: currentRouteName == 'Profile' }"> Profile </RouterLink>
+          <RouterLink :to="{ name: 'Profile' }" :class="{ filled: currentRouteName == 'Profile' }"> Profile </RouterLink>
         </li>
       </ul>
     </nav>
@@ -56,14 +56,59 @@ onBeforeMount(async () => {
 @import "./assets/toast.css";
 
 nav {
-  padding: 1em 2em;
-  background-color: lightgray;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0.0em 4em;
+  background-color: var(--background);
+  border-bottom: 4px solid var(--primary);
   display: flex;
   align-items: center;
+
+  a {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+
+  a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary);
+    border-radius: 0em 0em 0.5em 0.5em;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+
+  a:hover:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.6em;
   margin: 0;
 }
 
@@ -71,6 +116,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.5em;
+  margin: 0;
 }
 
 img {
@@ -78,21 +124,35 @@ img {
 }
 
 a {
-  font-size: large;
-  color: black;
+  border: 2px solid var(--background);
+  border-radius: 0em 0em 0.5em 0.5em;
+  padding: 0.4em 0.4em;
+  font-size: 1.0em;
+  color: var(--text);
+  text-align: center;
   text-decoration: none;
 }
 
+a:hover {
+  color: var(--background);
+}
+
+
 ul {
   list-style-type: none;
-  margin-left: auto;
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 1em;
+  gap: 0.2em;
+  margin: 0 0 0 auto;
 }
 
-.underline {
-  text-decoration: underline;
+li {
+  font-weight: bold;
+}
+
+.filled {
+  background-color: var(--accent);
+  color: var(--background);
 }
 </style>

@@ -39,6 +39,7 @@ p {
 }
 
 .author {
+  color: var(--text);
   font-weight: bold;
   font-size: 1.2em;
 }
