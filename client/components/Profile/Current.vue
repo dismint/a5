@@ -95,7 +95,7 @@ async function submitAdd() {
       _id: id,
       tags: add4.value,
     };
-    await fetchy("/api/tag/add", "POST", { nquery });
+    await fetchy("/api/tag/add", "POST", { query: nquery });
   }
   add1.value = "";
   add2.value = "";

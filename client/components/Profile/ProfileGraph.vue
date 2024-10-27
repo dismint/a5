@@ -41,7 +41,7 @@ function circlePoint(radius: number): { x: number; y: number } {
 }
 
 async function populateGraph() {
-  const graph = await fetchy("/api/graph/nodes");
+  const graph = await fetchy("/api/graph/nodes", "GET");
   for (let node of graph) {
     const webapp = await fetchy("/api/webapp/view", "GET", { query: { _id: node.item } });
     addNodes({

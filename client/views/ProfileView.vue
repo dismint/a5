@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CreateWebappForm from "@/components/Profile/CreateWebappForm.vue";
 import PatchWebappForm from "@/components/Profile/PatchWebappForm.vue";
 import WebappList from "@/components/Profile/WebappList.vue";
 import ProfileHeader from "@/components/Profile/ProfileHeader.vue";
