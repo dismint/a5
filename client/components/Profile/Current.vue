@@ -37,20 +37,39 @@ watch(() => props.node, async (newVal, oldVal) => {
 });
 
 async function submitForm() {
-  var query = {
-    _id: props.node,
-  };
-  if (edit1.value !== "") query.name = edit1.value;
-  if (edit2.value !== "") query.description = edit2.value;
-  if (edit3.value !== "") query.url = edit3.value;
-  await fetchy("/api/webapp", "PATCH", { query });
-
+  if (edit1.value !== "") {
+    const query = {
+      _id: props.node,
+      name: edit1.value,
+    };
+    await fetchy("/api/webapp", "PATCH", { query });
+  }
+  if (edit2.value !== "") {
+    const query = {
+      _id: props.node,
+      description: edit2.value,
+    };
+    await fetchy("/api/webapp", "PATCH", { query });
+  }
+  if (edit3.value !== "") {
+    const query = {
+      _id: props.node,
+      url: edit3.value,
+    };
+    await fetchy("/api/webapp", "PATCH", { query });
+  }
   if (edit4.value !== "") {
-    query.tags = edit4.value;
+    const query = {
+      _id: props.node,
+      tags: edit4.value,
+    };
     await fetchy("/api/tag/add", "POST", { query });
   }
   if (edit5.value !== "") {
-    query.tags = edit5.value;
+    const query = {
+      _id: props.node,
+      tags: edit5.value,
+    };
     await fetchy("/api/tag/remove", "POST", { query });
   }
   edit1.value = "";
@@ -72,11 +91,11 @@ async function submitAdd() {
   console.log(result);
   const id = result._id;
   if (add4.value !== "") {
-    query = {
+    const nquery = {
       _id: id,
       tags: add4.value,
     };
-    await fetchy("/api/tag/add", "POST", { query });
+    await fetchy("/api/tag/add", "POST", { nquery });
   }
   add1.value = "";
   add2.value = "";
